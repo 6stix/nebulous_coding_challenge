@@ -13,4 +13,9 @@ Note: this program is extremely easy to expand upon. For example, if a list was
 desired instead of a count, one could create a list of tuples of matching generated
 numbers and then return the list.
 
+Also, I attempted to memoize the solution, but it ended-up taking much more time
+to cache/store the generated numbers. I also seemingly do not have enough ram to
+store all of the numbers, haha! If you want to see the memoized solution, let me
+know and I will push it.
+
 Date: August 23rd, 2019
