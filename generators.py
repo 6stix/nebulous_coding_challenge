@@ -31,12 +31,6 @@ def main():
     print("Number of matches:", match_count)
     print("The total elapsed time (non-memo):", end-start) # 25.81 sec
 
-    start = time.time()
-    match_count = generator_matches_memo(start_a, multiplier_a, start_b, multiplier_b, limit, divisor, sixteen_bits_on)
-    end = time.time()
-    print("Number of matches:", match_count)
-    print("The total elapsed time (memoized):", end-start) # 16.41 sec
-
 def generator_matches(start_a, multiplier_a, start_b, multiplier_b, limit, divisor, bit_match):
     """
     This function generates numbers based-on two generators with their corresponding
@@ -56,48 +50,6 @@ def generator_matches(start_a, multiplier_a, start_b, multiplier_b, limit, divis
 
         if least_bits_a == least_bits_b:
             #matches.append((curr_a, curr_b)) -> example of list usage
-            match_count += 1
-
-    return match_count
-
-def generator_matches_memo(start_a, multiplier_a, start_b, multiplier_b, limit, divisor, bit_match):
-    """
-    This function is like the generator_matches function, but this one is memoized
-    to improve upon runtime.
-    """
-    memo = {}
-
-    curr_a = start_a
-    curr_b = start_b
-    #matches = []
-    match_count = 0
-    for i in range(limit):
-        if curr_a not in memo:
-            old_a = curr_a
-            curr_a = (curr_a * multiplier_a) % divisor
-            least_bits_a = curr_a & bit_match
-
-            memo[old_a] = (curr_a, least_bits_a)
-
-        else:
-            pair = memo[curr_a]
-            curr_a = pair[0]
-            least_bits_a = pair[1]
-
-        if curr_b not in memo:
-            old_b = curr_b
-            curr_b = (curr_b * multiplier_b) % divisor
-            least_bits_b = curr_b & bit_match
-
-            memo[old_b] = (curr_b, least_bits_b)
-
-        else:
-            pair = memo[curr_b]
-            curr_b = pair[0]
-            least_bits_b = pair[1]
-
-        if least_bits_a == least_bits_b:
-            #matches.append((curr_a, curr_b))
             match_count += 1
 
     return match_count
